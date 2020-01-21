@@ -25,8 +25,12 @@ class turtle:
   def drawTurtle(self):
     screen.blit(turtleImage, (self.x, self.y))
 
-
-
+    if self.y < 350:
+      self.y += 5
+  
+  def jump(self):
+    self.y = 200
+    
 
 
 ## Create background image
@@ -52,6 +56,9 @@ def gameLoop():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.KEYDOWN:
+          if event.key == pygame.K_SPACE:
+            t.jump()
 
     bg.draw()
     t.drawTurtle()
