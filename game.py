@@ -5,13 +5,24 @@ pygame.init()
 class background:
   x = 0
   y = 0
+  speed = 0
 
-  def __init__(self, x, y, sBackground, screen):
+  def __init__(self, x, y, speed, sBackground, screen):
     self.x = x
     self.y = y
+    self.speed = speed
   
   def draw(self):
-    screen.blit(sBackground, (0, 0))
+    x = self.x
+
+    screen.blit(sBackground, (0 - self.x, 0))
+    screen.blit(sBackground, (1280 - self.x, 0))
+    #screen.blit(sBackground, (820 - self.x, 0))
+
+    if x >= 410:
+      self.x = 0
+    self.x += self.speed
+
 
 class turtle:
   x = 100
@@ -52,7 +63,7 @@ clock = pygame.time.Clock()
 turtleImage = pygame.image.load("./images/dino.png")
 
 
-bg = background(0, 0, sBackground, screen)
+bg = background(0, 0, 10, sBackground, screen)
 t = turtle(1, 10)
 pygame.display.set_caption("Turtle RUN!")
 
