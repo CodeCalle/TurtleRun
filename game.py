@@ -19,7 +19,7 @@ class background:
     screen.blit(sBackground, (1280 - self.x, 0))
     #screen.blit(sBackground, (820 - self.x, 0))
 
-    if x >= 410:
+    if x >= 1280:
       self.x = 0
     self.x += self.speed
 
@@ -55,7 +55,7 @@ class turtle:
 ## Create background image
 #screen = pygame.display.set_mode((347, 260))
 screen = pygame.display.set_mode((1280, 720))
-sBackground = pygame.image.load("./images/background.png")
+sBackground = pygame.image.load("./images/backgroundVector.png")
 sBackground = pygame.transform.scale(sBackground, (1280, 720))
 
 clock = pygame.time.Clock()
@@ -63,7 +63,7 @@ clock = pygame.time.Clock()
 turtleImage = pygame.image.load("./images/dino.png")
 
 
-bg = background(0, 0, 10, sBackground, screen)
+bg = background(0, 0, 6, sBackground, screen)
 t = turtle(1, 10)
 pygame.display.set_caption("Turtle RUN!")
 

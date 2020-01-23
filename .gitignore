@@ -1,2 +1,4 @@
 *.psd
 .DS_Store
+*.svd
+background1.png
