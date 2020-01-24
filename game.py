@@ -78,7 +78,11 @@ def gameLoop():
         elif event.type == pygame.KEYDOWN:
           if event.key == pygame.K_SPACE:
             t.jump()
-
+        elif event.type == pygame.KEYUP:
+          if event.key == ord('q'):
+            pygame.quit()
+            main = False
+            
     bg.draw()
     t.drawTurtle()
     clock.tick(120)
