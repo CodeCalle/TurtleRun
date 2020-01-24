@@ -17,7 +17,6 @@ class background:
 
     screen.blit(sBackground, (0 - self.x, 0))
     screen.blit(sBackground, (1280 - self.x, 0))
-    #screen.blit(sBackground, (820 - self.x, 0))
 
     if x >= 1280:
       self.x = 0
@@ -55,7 +54,7 @@ class turtle:
 ## Create background image
 #screen = pygame.display.set_mode((347, 260))
 screen = pygame.display.set_mode((1280, 720))
-sBackground = pygame.image.load("./images/backgroundVector.png")
+sBackground = pygame.image.load("./images/backgroundVector.png").convert()
 sBackground = pygame.transform.scale(sBackground, (1280, 720))
 
 clock = pygame.time.Clock()
@@ -74,14 +73,16 @@ def gameLoop():
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+          pygame.quit();
+          running = False
         elif event.type == pygame.KEYDOWN:
           if event.key == pygame.K_SPACE:
             t.jump()
 
     bg.draw()
     t.drawTurtle()
-    clock.tick(60)
+    clock.tick(120)
+    print(clock)
     pygame.display.update()
 
 gameLoop()
