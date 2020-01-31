@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()
+pygame.font.init()
 
 class background:
   x = 0
@@ -17,7 +18,6 @@ class background:
 
     screen.blit(sBackground, (0 - self.x, 0))
     screen.blit(sBackground, (1280 - self.x, 0))
-    #screen.blit(sBackground, (820 - self.x, 0))
 
     if x >= 1280:
       self.x = 0
@@ -49,19 +49,25 @@ class turtle:
   
   def jump(self):
     self.speed = -18
-    
+
+
+# Function to show text on screen
+font = pygame.font.SysFont('comicsansms', 32)
+text = font.render('Press Q to quit', True, (0, 128, 0))
+
 
 
 ## Create background image
 #screen = pygame.display.set_mode((347, 260))
+
 screen = pygame.display.set_mode((1280, 720))
-sBackground = pygame.image.load("./images/backgroundVector.png")
+sBackground = pygame.image.load("./images/backgroundVector.png").convert()
 sBackground = pygame.transform.scale(sBackground, (1280, 720))
+
 
 clock = pygame.time.Clock()
 ## Create turtle image
 turtleImage = pygame.image.load("./images/dino.png")
-
 
 bg = background(0, 0, 6, sBackground, screen)
 t = turtle(1, 10)
@@ -70,17 +76,33 @@ pygame.display.set_caption("Turtle RUN!")
 def gameLoop():
 
   running = True
+  show_text = False
   while running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+          pygame.quit();
+          running = False
         elif event.type == pygame.KEYDOWN:
           if event.key == pygame.K_SPACE:
             t.jump()
+          elif event.key == ord('h'):
+            show_text = True
 
+        elif event.type == pygame.KEYUP:
+          if event.key == ord('q'):
+            pygame.quit()
+            main = False
+          elif event.key == ord('h'):
+            show_text = False
+            
     bg.draw()
     t.drawTurtle()
+    
+    # Prints help text on screen
+    if (show_text == True):
+      screen.blit(text, (100, 100))
+
     clock.tick(60)
     pygame.display.update()
 
